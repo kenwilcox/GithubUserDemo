@@ -1,17 +1,2 @@
-angular.module('app', [])
-// This is totally cool!
-
-angular.module('app')
-.controller('GithubCtrl', function($scope, GithubSvc) {
-  GithubSvc.fetchUsers().success(function (users) {
-    $scope.users = users
-  })
-})
-angular.module('app')
-.factory('GithubSvc', function ($http) {
-  return {
-    fetchUsers: function () {
-      return $http.get('https://api.github.com/users?since=4298694')
-    }   
-  }
-})
+angular.module("app",[]),angular.module("app").controller("GithubCtrl",["$scope","GithubSvc",function(t,u){u.fetchUsers().success(function(u){t.users=u})}]),angular.module("app").factory("GithubSvc",["$http",function(t){return{fetchUsers:function(){return t.get("https://api.github.com/users?since=4298694")}}}]);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1vZHVsZS5qcyIsImdpdGh1Yi9naXRodWIuY3RybC5qcyIsImdpdGh1Yi9naXRodWIuc3ZjLmpzIl0sIm5hbWVzIjpbImFuZ3VsYXIiLCJtb2R1bGUiLCJjb250cm9sbGVyIiwiJHNjb3BlIiwiR2l0aHViU3ZjIiwiZmV0Y2hVc2VycyIsInN1Y2Nlc3MiLCJ1c2VycyIsImZhY3RvcnkiLCIkaHR0cCIsImdldCJdLCJtYXBwaW5ncyI6IkFBQUFBLFFBQUFDLE9BQUEsVUNBQUQsUUFBQUMsT0FBQSxPQUNBQyxXQUFBLGNBQUEsU0FBQSxZQUFBLFNBQUFDLEVBQUFDLEdBQ0FBLEVBQUFDLGFBQUFDLFFBQUEsU0FBQUMsR0FDQUosRUFBQUksTUFBQUEsT0NIQVAsUUFBQUMsT0FBQSxPQUNBTyxRQUFBLGFBQUEsUUFBQSxTQUFBQyxHQUNBLE9BQ0FKLFdBQUEsV0FDQSxNQUFBSSxHQUFBQyxJQUFBIiwiZmlsZSI6ImFwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbImFuZ3VsYXIubW9kdWxlKCdhcHAnLCBbXSlcbi8vIFRvZGF5IGlzIFdlZG5lc2RheSAtIGFub3RoZXIgY2hhbmdlIiwiYW5ndWxhci5tb2R1bGUoJ2FwcCcpXG4uY29udHJvbGxlcignR2l0aHViQ3RybCcsIGZ1bmN0aW9uKCRzY29wZSwgR2l0aHViU3ZjKSB7XG4gIEdpdGh1YlN2Yy5mZXRjaFVzZXJzKCkuc3VjY2VzcyhmdW5jdGlvbiAodXNlcnMpIHtcbiAgICAkc2NvcGUudXNlcnMgPSB1c2Vyc1xuICB9KVxufSkiLCJhbmd1bGFyLm1vZHVsZSgnYXBwJylcbi5mYWN0b3J5KCdHaXRodWJTdmMnLCBmdW5jdGlvbiAoJGh0dHApIHtcbiAgcmV0dXJuIHtcbiAgICBmZXRjaFVzZXJzOiBmdW5jdGlvbiAoKSB7XG4gICAgICByZXR1cm4gJGh0dHAuZ2V0KCdodHRwczovL2FwaS5naXRodWIuY29tL3VzZXJzP3NpbmNlPTQyOTg2OTQnKVxuICAgIH0gICBcbiAgfVxufSkiXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
