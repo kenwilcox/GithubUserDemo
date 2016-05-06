@@ -6,7 +6,7 @@ angular.module('app')
   };
   
   function getItem(item) {
-      var temp = window.localStorage.getItem(CONFIG.prefix + item) || '';    
+      var temp = window.localStorage.getItem(CONFIG.prefix + item) || '{}';    
       return JSON.parse(temp);
   }
   
