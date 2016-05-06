@@ -1,16 +1,23 @@
 angular.module('app')
-.controller('GithubCtrl', function($scope, GithubSvc) {
+.controller('GithubCtrl', function($scope, GithubSvc, StorageSvc) {
     $scope.userData = {};
     $scope.repos = [];
     $scope.username = "kenwilcox";
     $scope.perPage = 100;    
+    $scope.useCache = true;
     
     $scope.getRepoData = function() {
         $scope.repos = [];
-        GithubSvc.fetchUserData($scope.username).success(function (data) {
-            $scope.userData = data;
-            getRepoPage(data.repos_url, $scope.perPage, 1);
-        });
+        if ($scope.useCache) {
+            console.log("getting cache");
+            $scope.repos = StorageSvc.getItem("repos");            
+        } else {
+            console.log("getting http");
+            GithubSvc.fetchUserData($scope.username).success(function (data) {
+                $scope.userData = data;
+                getRepoPage(data.repos_url, $scope.perPage, 1);
+            });
+        }
     };
     
     $scope.getLanguageData = function() {        
@@ -41,6 +48,8 @@ angular.module('app')
               page = page + 1;
               // console.log("getting page " + page)
               getRepoPage(repo_url, per_page, page);
+          } else {
+              StorageSvc.setItem("repos", $scope.repos);
           }
         });
     }

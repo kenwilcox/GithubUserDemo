@@ -9,6 +9,7 @@
   <input type="text" ng-model="username">
   {{username}}
   <button ng-click="getRepoData()">Get Info</button>  
+  <label>Use Cache:<input type="checkbox" ng-model="useCache"></label>
   <button ng-click="getLanguageData()" ng-disabled="repos.length < 1">Get Language Data</button>
   <!--<pre>{{userData | json}}</pre>-->
   {{userData.name}}
@@ -16,7 +17,7 @@
   <h1>Repos</h1>
   <!--<pre>{{repos | json}}</pre>-->
   <ul>
-    <li ng-repeat="repo in repos">
+    <li ng-repeat="repo in repos track by $index">
       <a href="{{repo.html_url}}">
       {{repo.name}}
       </a>
