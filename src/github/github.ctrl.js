@@ -41,6 +41,8 @@ angular.module('app')
     function getRepoPage(repo_url, per_page, page) {
         GithubSvc.fetchRepoData(repo_url, per_page, page).success(function (repos) {
           repos.forEach(function(r) {
+              // create a dictionary of the repo name
+              // and the keys fork and language_url
               $scope.repos.push(r);
           });
           

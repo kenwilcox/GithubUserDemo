@@ -4,16 +4,16 @@ var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('js', function() {
+gulp.task('js', function () {
   gulp.src(['src/**/module.js', 'src/**/app.config.js', 'src/**/*.js'])
     .pipe(sourcemaps.init())
-      .pipe(concat('app.js'))
-      .pipe(ngAnnotate())
-      .pipe(uglify())
+    .pipe(concat('app.js'))
+    .pipe(ngAnnotate())
+    .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('watch', ['js'], function() {
+gulp.task('watch', ['js'], function () {
   gulp.watch('src/**/*.js', ['js']);
 });
