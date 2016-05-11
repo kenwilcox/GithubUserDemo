@@ -6,7 +6,18 @@ I'd like to take the project data from GitHub's API and make it more like a resu
 ## TODO
   - [x] get the users repo from GitHub API.
   - [x] cache that - currently local storage, but could use something else.
-  - [] figure out how to get the language data without going over the API usage calls.
-  - [] cache that^
-  - [] go over the languages and calculate the percentages used
-  - [] display it all pretty like
+  - [ ] figure out how to get the language data without going over the API usage calls.
+  - [ ] cache that^
+  - [ ] go over the languages and calculate the percentages used
+  - [ ] display it all pretty like
+
+### Info
+Store the repo's in a dictionary of repoName: {values}, get the data out like so...
+
+```
+  var repos = [];
+  var repo = {"test": {url: "something.com", val: "value..."}};
+  repos.push(repo);
+  var obj = repos[0];
+  obj[Object.keys(obj)[0]].url 
+```
