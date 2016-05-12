@@ -4,7 +4,7 @@ angular.module('app')
     $scope.repos = [];
     $scope.username = "kenwilcox";
     $scope.perPage = 100;    
-    $scope.useCache = true;
+    $scope.useCache = true;    
     
     $scope.getRepoData = function() {
         $scope.repos = [];
@@ -21,23 +21,44 @@ angular.module('app')
     };
     
     $scope.getLanguageData = function() {        
-        $scope.languages = {};
-        //$scope.repos.forEach(function(r) {
-            //console.log(r.languages_url);
-            GithubSvc.fetchJson($scope.repos[0].languages_url).success(function (data) {
-                console.log(data);
-                data.forEach(function (lang) {                    
-                    for(var l in lang) {
-                        if ($scope[l] === undefined) {
-                            $scope.languages = lang[l];
-                        } else {
-                            $scope.languages[l] += lang[l];
-                        }
-                    }
-                });
-            });
-        //});
+        $scope.languages = StorageSvc.getItem("languages");
+        var tmp = StorageSvc.getItem("loaded");
+        if (Object.keys(tmp).length === 0) {
+            $scope.loaded = [];
+        } else {
+            $scope.loaded = tmp;
+        }
+        
+        for(var i = 0; i < $scope.repos.length; i++) {       
+            var r = $scope.repos[i];
+            if ($scope.loaded.indexOf(r.name) < 0) {
+                GithubSvc.fetchJson(r.languages_url).then(parseReturnedData, logError);
+            }
+        }
     };
+    
+    function logError(val) {
+        console.log(val);
+    }
+    
+    function parseReturnedData(result){
+        var data = result.data;        
+        var parts = result.config.url.split('/');
+        var repo = parts[parts.length -2];
+        console.log("Repo:", repo);
+        $scope.loaded.push(repo);
+        StorageSvc.setItem("loaded", $scope.loaded);
+
+        Object.keys(data).forEach(function (lang) {
+            console.log(lang + ":" + data[lang]);
+            if ($scope.languages[lang] === undefined) {
+                $scope.languages[lang] = data[lang];
+            } else {
+                $scope.languages[lang] += data[lang];
+            }
+        });
+        StorageSvc.setItem("languages", $scope.languages);
+    }
     
     function getRepoPage(repo_url, per_page, page) {
         GithubSvc.fetchRepoData(repo_url, per_page, page).success(function (repos) {
