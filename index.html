@@ -21,7 +21,7 @@
     <li ng-repeat="repo in repos track by $index">
       <a href="{{repo.html_url}}">
       {{repo.name}}
-      </a> &nbsp;
+      </a> &nbsp; - {{repo.language}}
       <i class="fa fa-code-fork" ng-show="repo.fork"></i>
   </ul>
 

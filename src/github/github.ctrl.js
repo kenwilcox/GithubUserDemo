@@ -4,7 +4,7 @@ angular.module('app')
     $scope.repos = [];
     $scope.username = "kenwilcox";
     $scope.perPage = 100;    
-    $scope.useCache = true;
+    $scope.useCache = false;
     
     $scope.getRepoData = function() {
         $scope.repos = [];
@@ -40,10 +40,18 @@ angular.module('app')
     
     function getRepoPage(repo_url, per_page, page) {
         GithubSvc.fetchRepoData(repo_url, per_page, page).success(function (repos) {
-          repos.forEach(function(r) {
-              // create a dictionary of the repo name
-              // and the keys fork and language_url
-              $scope.repos.push(r);
+            repos.forEach(function(r) {
+            // create a dictionary of the repo name
+            // and the keys fork and language_url
+            var repo = {
+                name: r.name,
+                url: r.url,
+                fork: r.fork,
+                languages_url: r.languages_url,
+                html_url: r.html_url,
+                language: r.language,
+            };            
+            $scope.repos.push(repo);
           });
           
           if (repos.length === per_page) {
