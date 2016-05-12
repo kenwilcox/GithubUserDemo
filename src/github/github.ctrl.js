@@ -31,7 +31,7 @@ angular.module('app')
         
         for(var i = 0; i < $scope.repos.length; i++) {       
             var r = $scope.repos[i];
-            if ($scope.loaded.indexOf(r.name) < 0) {
+            if ($scope.loaded.indexOf(r.name) < 0 && !r.fork) {
                 GithubSvc.fetchJson(r.languages_url).then(parseReturnedData, logError);
             }
         }
