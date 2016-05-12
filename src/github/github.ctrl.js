@@ -4,7 +4,7 @@ angular.module('app')
     $scope.repos = [];
     $scope.username = "kenwilcox";
     $scope.perPage = 100;    
-    $scope.useCache = false;
+    $scope.useCache = true;
     
     $scope.getRepoData = function() {
         $scope.repos = [];
@@ -22,10 +22,11 @@ angular.module('app')
     
     $scope.getLanguageData = function() {        
         $scope.languages = {};
-        $scope.repos.forEach(function(r) {
-            // console.log(r.languages_url);
-            GithubSvc.fetchJson(r.languages_url).success(function (data) {
-                data.forEach(function (lang) {
+        //$scope.repos.forEach(function(r) {
+            //console.log(r.languages_url);
+            GithubSvc.fetchJson($scope.repos[0].languages_url).success(function (data) {
+                console.log(data);
+                data.forEach(function (lang) {                    
                     for(var l in lang) {
                         if ($scope[l] === undefined) {
                             $scope.languages = lang[l];
@@ -35,7 +36,7 @@ angular.module('app')
                     }
                 });
             });
-        });
+        //});
     };
     
     function getRepoPage(repo_url, per_page, page) {
